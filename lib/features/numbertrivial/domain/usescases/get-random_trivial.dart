@@ -10,7 +10,7 @@ class GetRandomTrivialUseCase extends UseCase<NumberTrivial, NoParams> {
   GetRandomTrivialUseCase(this.numberTrevialRepository);
 
   @override
-  Future<Either<Failure, NumberTrivial>>? call(NoParams params) {
+  Future<Either<Failure, NumberTrivial?>>? call(NoParams params) {
     return numberTrevialRepository.getRandumNumerTrvial();
   }
 }

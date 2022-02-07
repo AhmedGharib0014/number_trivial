@@ -11,7 +11,7 @@ class GetConcreteNumberTrivial extends UseCase<NumberTrivial, Params> {
   GetConcreteNumberTrivial(this.repository);
 
   @override
-  Future<Either<Failure, NumberTrivial>>? call(Params params) {
+  Future<Either<Failure, NumberTrivial?>>? call(Params params) {
     return repository.getConcretNumerTrvial(params.number);
   }
 }
