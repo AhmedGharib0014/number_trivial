@@ -2,6 +2,7 @@ import 'package:number_trivial/core/error/exceptions.dart';
 import 'package:number_trivial/core/network/networkInfo.dart';
 import 'package:number_trivial/features/numbertrivial/data/datasources/locae_number_trivial_data_source.dart';
 import 'package:number_trivial/features/numbertrivial/data/datasources/remote_data_source_data_source.dart';
+import 'package:number_trivial/features/numbertrivial/data/models/number_trivial_model.dart';
 import 'package:number_trivial/features/numbertrivial/domain/entities/number_trivial.dart';
 import 'package:number_trivial/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -28,10 +29,10 @@ class NumberTrivialRepositpryImplemantation extends NumberTrevialRepository {
   }
 
   Future<Either<Failure, NumberTrivial?>>? _gettrivial(
-      Future<NumberTrivial?>? Function() getTrivialFunction) async {
+      Future<NumberTrivialModel?>? Function() getTrivialFunction) async {
     if (await netWorkInfo.isConnected == true) {
       try {
-        NumberTrivial? numberTrivial = await getTrivialFunction();
+        NumberTrivialModel? numberTrivial = await getTrivialFunction();
         localDateSource.saveNumberTrivial(numberTrivial);
         return Right(numberTrivial);
       } on ServerException {
