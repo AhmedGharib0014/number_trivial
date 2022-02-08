@@ -1,5 +1,5 @@
 import 'package:number_trivial/core/error/exceptions.dart';
-import 'package:number_trivial/core/plateform/networkInfo.dart';
+import 'package:number_trivial/core/network/networkInfo.dart';
 import 'package:number_trivial/features/numbertrivial/data/datasources/locae_number_trivial_data_source.dart';
 import 'package:number_trivial/features/numbertrivial/data/datasources/remote_data_source_data_source.dart';
 import 'package:number_trivial/features/numbertrivial/domain/entities/number_trivial.dart';
@@ -20,23 +20,6 @@ class NumberTrivialRepositpryImplemantation extends NumberTrevialRepository {
   @override
   Future<Either<Failure, NumberTrivial?>>? getConcretNumerTrvial(int? number) {
     return _gettrivial(() => remoteDateSource.getConcretNumerTrvial(number));
-    // if (await netWorkInfo.isConnected == true) {
-    //   try {
-    //     NumberTrivial? numberTrivial =
-    //         await remoteDateSource.getConcretNumerTrvial(number);
-    //     localDateSource.saveNumberTrivial(numberTrivial);
-    //     return Right(numberTrivial);
-    //   } on ServerException {
-    //     return Left(ServerFailure());
-    //   }
-    // } else {
-    //   try {
-    //     final numberTrivial = await localDateSource.getLastNumerTrvial();
-    //     return Right(numberTrivial);
-    //   } on CachException {
-    //     return Left(CachFailure());
-    //   }
-    // }
   }
 
   @override

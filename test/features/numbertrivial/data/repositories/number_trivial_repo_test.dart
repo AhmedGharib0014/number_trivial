@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:number_trivial/core/error/exceptions.dart';
 import 'package:number_trivial/core/error/failure.dart';
-import 'package:number_trivial/core/plateform/networkInfo.dart';
+import 'package:number_trivial/core/network/networkInfo.dart';
 import 'package:number_trivial/features/numbertrivial/data/datasources/locae_number_trivial_data_source.dart';
 import 'package:number_trivial/features/numbertrivial/data/datasources/remote_data_source_data_source.dart';
 import 'package:number_trivial/features/numbertrivial/data/models/number_trivial_model.dart';
