@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:number_trivial/core/error/exceptions.dart';
 import 'package:number_trivial/features/numbertrivial/data/datasources/locae_number_trivial_data_source.dart';
@@ -8,15 +8,19 @@ import 'package:number_trivial/features/numbertrivial/data/models/number_trivial
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../fixtures/fixure_reader.dart';
+import 'local_data_source_test.mocks.dart';
 
-class MockSharedPrefrenences extends Mock implements SharedPreferences {}
-
+@GenerateMocks([
+  SharedPreferences
+], customMocks: [
+  MockSpec<SharedPreferences>(as: #MockSharedPreferencesForTest1),
+])
 void main() {
-  late MockSharedPrefrenences mockSharedPrefrenences;
+  late MockSharedPreferencesForTest1 mockSharedPrefrenences;
   late LocalNumberTrivialDataSourceImple localNumberTrivialDataSourceImple;
 
   setUp(() async {
-    mockSharedPrefrenences = MockSharedPrefrenences();
+    mockSharedPrefrenences = MockSharedPreferencesForTest1();
     localNumberTrivialDataSourceImple =
         LocalNumberTrivialDataSourceImple(mockSharedPrefrenences);
   });
@@ -45,20 +49,19 @@ void main() {
     });
   });
 
-  // group('saveNumberTrivial', () {
-  //   NumberTrivialModel TNumberTrivial =
-  //       NumberTrivialModel(number: 1, text: 'test');
-  //   test('should save number trivial', () {
-  //     final modelString = TNumberTrivial.toJson();
+  group('saveNumberTrivial', () {
+    NumberTrivialModel TNumberTrivial =
+        NumberTrivialModel(number: 1, text: 'test');
 
-  //     when(mockSharedPrefrenences.setString(
-  //             LOCAL_NUMBER_TRIVIAL_KEY, jsonEncode(modelString)))
-  //         .thenAnswer((_) async => true);
-  //     (true);
+    test('should save number trivial', () {
+      final modelString = TNumberTrivial.toJson();
+      when(mockSharedPrefrenences.setString(
+              LOCAL_NUMBER_TRIVIAL_KEY, jsonEncode(modelString)))
+          .thenAnswer((_) async => true);
 
-  //     localNumberTrivialDataSourceImple.saveNumberTrivial(TNumberTrivial);
-  //     verify(mockSharedPrefrenences.setString(
-  //         LOCAL_NUMBER_TRIVIAL_KEY, jsonEncode(modelString)));
-  //   });
-  // });
+      localNumberTrivialDataSourceImple.saveNumberTrivial(TNumberTrivial);
+      verify(mockSharedPrefrenences.setString(
+          LOCAL_NUMBER_TRIVIAL_KEY, jsonEncode(modelString)));
+    });
+  });
 }
