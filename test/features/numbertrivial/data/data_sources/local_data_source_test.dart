@@ -58,7 +58,6 @@ void main() {
       when(mockSharedPrefrenences.setString(
               LOCAL_NUMBER_TRIVIAL_KEY, jsonEncode(modelString)))
           .thenAnswer((_) async => true);
-
       localNumberTrivialDataSourceImple.saveNumberTrivial(TNumberTrivial);
       verify(mockSharedPrefrenences.setString(
           LOCAL_NUMBER_TRIVIAL_KEY, jsonEncode(modelString)));
