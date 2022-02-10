@@ -6,9 +6,9 @@ import 'package:number_trivial/core/usecases/usecases_interface.dart';
 import 'package:number_trivial/features/numbertrivial/domain/entities/number_trivial.dart';
 import 'package:number_trivial/features/numbertrivial/domain/repositories/number_trivial_repository.dart';
 
-class GetConcreteNumberTrivial extends UseCase<NumberTrivial, Params> {
+class GetConcreteNumberTrivialUseCase extends UseCase<NumberTrivial, Params> {
   final NumberTrevialRepository repository;
-  GetConcreteNumberTrivial(this.repository);
+  GetConcreteNumberTrivialUseCase(this.repository);
 
   @override
   Future<Either<Failure, NumberTrivial?>>? call(Params params) {

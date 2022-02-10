@@ -9,12 +9,12 @@ class MocNumberTrivialRepository extends Mock
     implements NumberTrevialRepository {}
 
 void main() {
-  late GetConcreteNumberTrivial usecases;
+  late GetConcreteNumberTrivialUseCase usecases;
   late MocNumberTrivialRepository mocNumberTrivialRepository;
 
   setUp(() {
     mocNumberTrivialRepository = MocNumberTrivialRepository();
-    usecases = GetConcreteNumberTrivial(mocNumberTrivialRepository);
+    usecases = GetConcreteNumberTrivialUseCase(mocNumberTrivialRepository);
   });
   final TNumber = 1;
   final TNumberTrivial = NumberTrivial(text: "test", number: 1);
