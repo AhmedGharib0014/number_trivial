@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -55,6 +56,25 @@ void main() {
         // verify
         verify(inputConverter.convertInputString(TnumberString));
       });
+
+      // arrange
+
+      // verify
+
+      // act
+
+      blocTest('should emit failure state when converting failed',
+          build: () => numbertrivialBloc,
+          act: (NumbertrivialBloc bloc) {
+            when(inputConverter.convertInputString(TnumberString))
+                .thenReturn(Left(ConvertFailure()));
+
+            bloc.add(
+              NumbertrivialEventGetConctete(numberString: TnumberString),
+            );
+          },
+          expect: () =>
+              [NumbertrivialFailure(error: INVALID_INPUT_FAILURE_STRING)]);
     });
   });
 }
