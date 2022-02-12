@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:number_trivial/dependency_container.dart';
 
-void main() {
+void main() async {
+  await initDependencies();
   runApp(const MyApp());
 }
 
