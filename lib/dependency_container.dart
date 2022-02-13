@@ -12,10 +12,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/numbertrivial/domain/repositories/number_trivial_repository.dart';
 
-GetIt getIt = GetIt.instance();
+GetIt getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
   // register features
+  getIt.registerLazySingletonAsync(() => SharedPreferences.getInstance());
 
   //bloc
   getIt.registerFactory(() => NumbertrivialBloc(
@@ -47,5 +48,4 @@ Future<void> initDependencies() async {
 
   // register extrnal
   getIt.registerLazySingleton(() => http.Client());
-  getIt.registerLazySingletonAsync(() => SharedPreferences.getInstance());
 }

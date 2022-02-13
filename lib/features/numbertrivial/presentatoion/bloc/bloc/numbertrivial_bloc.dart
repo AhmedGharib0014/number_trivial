@@ -31,23 +31,27 @@ class NumbertrivialBloc extends Bloc<NumbertrivialEvent, NumbertrivialState> {
     on<NumbertrivialEventGetRandom>(_getRandomNumberTrivail);
   }
 
-  FutureOr<void> _getconcretNumberTrivail(
-      NumbertrivialEventGetConctete event, Emitter<NumbertrivialState> emit) {
+  FutureOr<void> _getconcretNumberTrivail(NumbertrivialEventGetConctete event,
+      Emitter<NumbertrivialState> emit) async {
     try {
       final convertingResult =
           inputConverter.convertInputString(event.numberString);
 
       if (convertingResult != null) {
-        convertingResult.fold(
+        await convertingResult.fold<FutureOr>(
             (left) =>
                 emit(NumbertrivialFailure(error: INVALID_INPUT_FAILURE_STRING)),
             (right) async {
           emit(NumbertrivialLoading());
           final TrivialOrFailure =
               await getConcreteNumberTrivial.call(Params(right));
-          TrivialOrFailure?.fold((l) {
+          TrivialOrFailure?.fold<Future<bool>>((l) {
             emit(NumbertrivialFailure(error: _mapErrorToMessage(l)));
-          }, (right) => emit(NumbertrivialSuccess(numberTrivial: right!)));
+            return Future.value(true);
+          }, (right) async {
+            emit(NumbertrivialSuccess(numberTrivial: right!));
+            return Future.value(true);
+          });
         });
       } else {
         emit(NumbertrivialFailure(error: INVALID_INPUT_FAILURE_STRING));
